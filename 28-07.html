@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<form action="./submit.html">
+<body align="center" style="background-color:cornsilk;">
+    <img src="./image/Screenshot 2025-07-28 113355.png" target="image" width="100%">
+    <fieldset>
+        <legend>Applicant Details</legend>
+    <table> 
+
+        <tr>
+        <td ><label for="name">Name:<span><sup style="color: red;">*</sup></span></label></td>
+        <td><input type="text" name="Name" id="name" maxlength="20" required><br>
+        <span style="color:red; font-size: 12px;">(Maximum characters: 20)</span></td>
+        <td style="width: 60px;"></td>
+        <td><label for="name">Father's Name:<span><sup style="color: red;">*</sup></span></label></td>
+        <td><input type="text" name="Father's Name" id="name" required></td>
+         </tr>
+
+         <tr>
+         <td><label for="date">Date of Birth:<span><sup style="color: red;">*</sup></span></label></td>
+         <td><input type="date"  id="date" required></td>
+         <td style="width: 60px;"></td>
+         <td><label for="gender">Gender:<span><sup style="color: red;">*</sup></span></label></td>
+         <td>
+         <input type="radio" name="gender" value="Female" id="Female">
+         <label for="Female">Female</label>
+         </td>
+         <td>
+         <label for="Male">Male</label>
+         <input type="radio" name="gender" value="Male"   id="Male" style="margin-left: 10px;">
+         </td>
+         </tr>
+
+         <tr>
+            <td>Age As on:</td>
+            <td><input type="text"  size="1" >yrs<input type="text" id="Month(s)" size="1">mons<input type="text" id="Day(s)"  size="1">days</td>
+            <td style="width: 80px;"></td>
+            <td><label for="Aadhaar No:">Aadhaar No:</label></td>
+            <td><input type="text"  id="Aadhaar No:"></td>
+         </tr>
+
+         <tr>
+            <td><label for="WhatApp No">WhatApp No:<span><sup style="color: red;">*</sup></span></label></td>
+            <td><input type="text" id="WhatApp No" ></td>
+            <td style="width: 80px;"></td>
+            <td><label for="E-mail">E-mail Id:<span><sup style="color: red;">*</sup></span></label></td>
+            <td><input type="text" id="E-mail"></td>
+         </tr>
+         <tr>
+            <td><label for="file">Photo:<span><sup style="color: red;">*</sup></span></label></td>
+            <td><input type="file" id="file"></td>
+         </tr>
+
+         </table>
+   
+    </fieldset><br>
+    <fieldset>
+        <legend>Residential Address Details</legend>
+        <table>
+           <tr>
+            <td><label for="Address">Applicant's Address:<span><sup style="color: red;">*</sup></span></label></td>
+            <td colspan="3">
+            <textarea  id="Address"  name="address" rows="3" cols="30" style="resize: both;"></textarea><br> 
+            <span style="color:red; font-size: 12px;">(Maximum characters: 20)</span></td>
+            <td style="width: 100px;"></td>
+            <td><label for="district">District:<span><sup style="color: red;">*</sup></span></label></td>
+            <td><select id="district" name="district">
+                <option value="Nalgonda">Nalgonda</option>
+                <option value="jagtial">Jagital</option>
+                <option value="Khammam">Khammam</option>
+                <option value="Karimnagar">Karimnagar</option>
+                <option value="Mulugu">Mulugu</option>
+                <option value="Nirmal">Nirmal</option>
+            </select></td>
+           </tr>
+           
+           <tr>
+            <td><label for="Mandal">Mandal:<span><sup style="color: red;">*</sup></span></label></td>
+             
+            <td><select id="Mandal" name="Mandal">
+                <option value="Luxettipet">Luxettipet</option>
+                <option value="Mancherial">Mancherial</option>
+                <option value="Bhupalpalle">Bhupalpalle</option>
+                <option value="Chityal">Chityal</option>
+                <option value="Ghanpur">Ghanpur</option>
+                <option value="Mandamarri">Mandamarri</option></select></td>
+
+            <td style="width: 80px;"></td>
+            <td><label for="Village">Village:<span><sup style="color: red;">*</sup></span></label></td>
+            <td><select id=Village name="Village" style="margin-left: 10px;">
+                <option value="Amberpet">Amberpet</option>
+                <option value="Gaganmahal">Gaganmahal</option>
+                <option value="Nampally">Nampally</option>
+                <option value="Balanagar">Balanagar</option>
+                <option value="Begumpet">Begumpet</option>
+                <option value="Bagh Lingampally">Bagh Lingampally</option>
+            </select></td>
+           </tr>
+
+           <tr>
+            <td><label for="code">Pincode:<span><sup style="color: red;">*</sup></span></label></td>
+            <td><input type="text" id="code"></td>
+           </tr>
+         </table>
+    </fieldset><br>
+
+    <fieldset>
+        <legend>Pass Type Details</legend>
+        <table>
+            <tr>
+                <td><label for="City">City:<span><sup style="color: red;">*</sup></span></label></td>
+                <td><select id="City" name="City">
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Warangal">Warangal</option>
+                    <option value="Nizamabad">Nizamabad</option>
+                    <option value="Khammam">Khammam</option>
+                </select></td>
+            </tr>
+
+            <tr>
+                <td><label for="Passtype">Pass Type:<span><sup style="color: red;">*</sup></span></label></td>
+                <td><select id="Passtype" name="pass type" >
+                    <option value="Student Passes">Student Passes</option>
+                    <option value="Employee Passes">Employee Passes</option>
+                    <option value="Senior Citizen Passes">Senior Citizen Passes</option>
+                    <option value="special passes for NGOs">special passes for NGOs</option>
+                    <option value="General Commuter Pass">General Commuter Pass</option>
+                </select></td>
+            </tr>
+        </table>
+    </fieldset><br>
+
+    <fieldset>
+        <legend>Mode of Payment & Pass Collection</legend>
+        <table>
+            <tr>
+                <td><label for="Paymentmode">Payment Mode:</label></td>
+                <td><select id="paymentmode" name="Payment" >
+                    <option value="cards">cards</option>
+                    <option value="digital payments">digital payments</option>
+                    <option value="bank transfers">bank transfers</option>
+                    <option value="cash">cash</option>
+                </select></td>
+            </tr>
+
+            <tr>
+                <td><label for="Passdelivarymode">Pass Delivary Mode:</label></td>
+                <td><select id="Passdelivarymode"  name="passmode">
+                    <option value="Online">Online</option>
+                    <option value="Ofline">Ofline</option>
+                    <option value="Office">Office</option>
+                </select></td>
+            </tr>
+
+            <tr>
+                <td><label for="Collect pass center">Center at which you want to collect pass:</label>
+                </td>
+                <td><select id="Collect pass center"  name="pass center" >
+                    <option value="Afzalgunj Bus Stand">Afzalgunj Bus Stand</option>
+                    <option value="BHEL Bus Terminus">BHEL Bus Terminus</option>
+                    <option value="Charminar Bus Station">Charminar Bus Station</option>
+                    <option value="Dilsukhnagar Bus Station">Dilsukhnagar Bus Station</option>
+                    <option value="KPHB Bus Stop">KPHB Bus Stop</option>
+                    <option value="Vanasthalipuram">Vanasthalipuram</option>
+                </select></td>
+            </tr>
+        </table>
+    </fieldset><br>
+    <img src="./image/Screenshot 2025-07-28 171459.png" ><br><br>
+    <input type="text" style="margin-right: 50px;" ><br><br>
+
+    <input type="submit" style="margin-right: 50px;">
+    
+</body>
+</form>
+</html>
