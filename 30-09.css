@@ -1,0 +1,314 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   font-family: "Inconsolata", sans-serif;
+}
+html,body{
+    height: 100%;
+}
+.nav-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: black;
+    color: white;
+    padding: 8px;
+    position:fixed;
+    top: 0;
+    z-index: +1;
+}
+.item{
+    flex: 1; 
+    text-align: center;
+    padding: 10px 0; 
+    color: white;
+    cursor: pointer;
+
+}
+.item a {
+    color: white;
+    text-decoration: none;      
+    transition: background 0.3s;
+}
+.nav-container>.item:hover{
+    background-color: #ccc;
+    cursor: pointer;
+
+}
+.bg-container{
+    width: 100%;
+    height: 68%;
+    background-image: url(	"https://www.w3schools.com/w3images/coffeehouse.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.text-container{
+    font-size: 5rem;
+    color: white;
+    text-align: center;
+    line-height: 120px;
+}
+.para-container1{
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
+    /* background-color: black;
+    color: white; */
+    background-color: black;
+    
+    padding: 5px;
+}
+.para-container1>p{
+    color: white;
+    font-size: small;
+    letter-spacing: 2px;
+}
+.para-container2{
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+    color: white;
+}
+.para-container2>p{
+    letter-spacing: 2px;
+    font-size: small;
+    color: white;
+}
+.main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.main-container{
+    width: 50%;
+    border: 0px solid;
+}
+.para-container3{
+    display: flex;
+    justify-content: center;
+}
+.para-container3>p{
+    padding: 5px;
+    background-color: black;
+    color: white;
+    width: fit-content;
+    letter-spacing: 5px;
+}
+
+.para-container4>p{
+    color: rgba(0, 0, 0, 0.795);
+    margin-top: 10%;
+    line-height: 1.5;
+    text-align:justify ;
+    font-size: medium;
+    letter-spacing: 1px;
+    
+}
+.para-container5>p{
+    color:rgba(0, 0, 0, 0.795) ;
+    margin-top: 3%;
+    line-height: 1.5;
+    text-align:justify ;
+    font-size: medium;
+    letter-spacing: 1px;
+}
+.para{
+    background-color: rgba(240, 248, 255, 0.479);
+    padding: 2%;
+    border-left-color: rgba(0, 0, 0, 0.315);
+    border-left-width: 5px;
+    border-left-style: solid;
+    padding: 10px;
+    
+}
+.para-container6>p{
+    color: black;
+    margin-top: 3%;
+    line-height: 1.5;
+    text-align:justify ;
+    font-size: large;   
+}
+.par>p{
+    color: black;
+}
+.img-container{
+    width: 100%;
+}
+img{
+    width: 100%;
+    filter: grayscale(50%);
+}
+.para-container7>p{
+    color: black;
+    font-size: large;
+}
+.menu-container{
+    margin-top: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+.text-container1>center>p{
+    width: fit-content;
+    background-color: black;
+    color: white;
+    padding: 5px;
+    letter-spacing: 5px;
+}
+input[type="radio"]{
+    display: none;
+}
+.text-container1{
+    width: 100%;
+}
+.menu-container>.text-container1{
+    text-align: center;
+}
+.text-container2{
+    width: 100%;
+    height: 500px;
+    border: 0px solid;
+    overflow-y: auto;
+    background-color: rgba(240, 248, 255, 0.247);
+    padding: 20px;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 10px 10px 10px  rgba(0, 0, 0, 0.5);
+
+}
+.tab{
+    display: inline-block;
+    padding: 10px 120px;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin: 0;
+    transition: all 0.3s ease;
+    box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.514);
+
+}
+.tab:hover{
+    background-color: rgba(0, 0, 0, 0.466);
+    color: white;
+}
+.menu1,.menu2{
+    display: none;
+}
+#text1:checked ~ .text-container2>.menu1{
+    display: block;
+}
+#text2:checked ~ .text-container2>.menu2{
+    display: block;
+}
+#text1:checked ~ .container label[for="text1"],
+#text2:checked ~ .container label[for="text2"] {
+    background-color: rgba(0, 0, 0, 0.685);
+    color: white;
+    font-weight: bold;
+}
+.menu1,.menu2>h3,p{
+    color: rgba(0, 0, 0, 0.568);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+}
+.img{
+    filter: grayscale(50%);
+}
+.para-container8{
+    display: flex;
+    justify-content: center;
+}
+.para-container8>p{
+
+    padding: 2px;
+    background-color: black;
+    color: white;
+    width: fit-content;
+    letter-spacing: 5px;
+}
+.para-container9{
+    text-align: left;
+    
+}
+.para-container9>p{
+    margin-top: 50px;
+    color: black;
+    letter-spacing: 2px;
+}
+
+.para-container9>p>span{
+    background-color: rgba(0, 0, 0, 0.753);
+    color: white;
+    padding: 3px;
+}
+.para-container9>p{
+    margin-top:20px ;
+    line-height: 1.5;
+}
+.para-container10{
+    display: flex;
+    text-align: left;
+}
+.para-container10>p{
+    color: black;
+    letter-spacing: 2px;
+    
+}
+.form-container{
+    width: 100%;
+}
+.form-container>input{
+    width: 100%;
+    padding: 20px;
+    margin: 10px 0px;
+}
+.form-container>input::placeholder{
+    letter-spacing: 3px;
+    font-size: medium;
+}
+.button{
+    display: flex;
+    justify-content: left;
+}
+.button>input{
+    padding: 10px;
+    background-color: black;
+    color: white;
+    letter-spacing: 2px;
+    font-size: large;
+}
+.button>input:hover{
+    background-color: #ccc;
+    color: black;
+}
+.foot-container{
+    width: 100%;
+}
+.para-container11{
+    width: 100%;
+    height: 150px;
+    background-color: rgba(240, 248, 255, 0.692);
+    display: flex;
+    justify-content: center;
+   align-items: center; 
+    margin-top: 90px;
+
+}
+.para-container11 p, 
+.para-container11 a {
+    
+    
+    color: black; 
+    font-size: 16px;
+    
+   
+}
+
