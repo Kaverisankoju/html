@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <center>
+ <h1 id="title">WELCOMe!</h1>
+    <button onclick="Changetext()">Click Me</button>
+    <script>
+        function Changetext(){
+        const h = document.getElementById("title");
+        h.innerText = "Hello Students!";
+        h.style.color = "Green";
+        h.style.fontSize = "30px";
+        }                       
+    </script>
+  <h2>Click a Button to Change Background Color</h2>
+  <button onclick="changecolor('red')">Red</button>
+  <button onclick="changecolor('blue')">Blue</button>
+  <button onclick="changecolor('green')">Green</button>
+  <button onclick="changecolor('orange')">Orange</button>
+  <button onclick="resetcolor()">Reset</button>
+  <p id="msg"></p>
+
+  </center>
+  <script>
+    function changecolor(color){
+      document.body.style.background = color;
+      document.getElementById("msg").innerText = "👉 Current Color: " + color;
+    }
+    function resetcolor(){
+      document.body.style.background = "white";
+      document.getElementById("msg").innerText = ""
+    }
+  </script>
+</body>
+</html>
