@@ -1,0 +1,35 @@
+<!-- Online Toss App -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <center>
+  <h1>Heads or Tails</h1>
+  <p>Flip a virtual coin with this online and free app.</p>
+  <img src="https://justflipacoin.com/img/share-a-coin.png" alt="" width="300px" height="300px"><br>
+  <button onclick="Toss()">Flip the Coin</button>
+  <script>
+      function Toss(){
+        let random_num = Math.random()*100
+        random_num = Math.round(random_num)
+        if(random_num%2 == 0){
+          let img_ele = document.getElementsByTagName("img")
+          img_ele[0].src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNZzaR-NzCh2cG3LzRqTqW55LYQzhl-7Bvmg&s"
+          console.log("Head image",random_num)
+          
+        }else{
+          let img_ele = document.getElementsByTagName("img")
+          img_ele[0].src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW2z7K0-eZWnhzHVmE9vduBz_RlSyA1bpDyg&s"
+          console.log("Tail image",random_num)
+          
+        
+       }
+      }
+  </script>
+  </center>
+</body>
+</html>

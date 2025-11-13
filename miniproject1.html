@@ -1,0 +1,48 @@
+<!-- Mini task -->
+ <!-- Display a list of student names inside <ul>.
+
+
+When the “Add Name” button is clicked → new <li> gets added.
+
+
+When “Remove Last” button is clicked → last <li> gets removed. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul id="studentList">
+    <li>Rahul</li>
+    <li>Shruthi</li>
+    <li>Tom</li>
+    <li>Geetha</li>
+    <li>Gowtha</li>
+    <li>Ravi</li>
+    <li>Anjali</li>
+    
+    
+  </ul>
+  <button onclick="addname()">add name</button>
+  <button onclick="removename()">Remove last</button>
+  <script>
+    function addname(){
+      let ul = document.getElementById("studentList");
+      let li = document.createElement("li");
+      li.textContent = "Prabhas"
+      ul.append(li)
+    }
+    function removename(){
+      let ul = document.getElementById("studentList")
+      if(ul.lastElementChild){
+        ul.removeChild(ul.lastElementChild);
+      }
+    }
+  </script>
+</body>
+
+</html>
