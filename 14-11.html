@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="changeTheContent()">Click to Change</button>
+    <script>
+        let a = document.createElement("h1")
+        a.innerHTML = "Welcome to JavaScript"
+        
+        
+      
+        let b = document.createElement("p")
+        b.innerText = "this is paragraph"
+        
+       
+        let c = document.createElement("img")
+        c.src = "https://img.freepik.com/free-photo/green-trees-near-body-water-daytime_395237-20.jpg?semt=ais_hybrid&w=740&q=80" 
+        
+        document.body.append(a,b,c)
+        document.body.removeChild()
+
+        function changeTheContent(){
+            document.body.style.background = "lightpink"
+            a.style.color = "blue"
+            a.style.background = "lightgreen"
+            b.style.color = "red"
+            b.style.background = "yellow"
+            b.style.fontSize = "25px"
+            c.style.width = "300px"
+            c.style.height = "300px"
+            let d = document.createElement("h3")
+            d.innerHTML = "👉 IMAGE"
+            document.body.appendChild(d)
+        }
+    </script>
+</body>
+</html>
