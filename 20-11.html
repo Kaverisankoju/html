@@ -1,0 +1,213 @@
+<!-- normal onclick -->
+ <!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="head">HEADING</h1>
+    <p class="para">paragraph</p>
+    <script>
+        let btn = document.createElement("button")
+        btn.textContent = "addstyles"
+        btn.onclick = function(){
+            let a = document.getElementById("head")
+            a.style.color = "blue"
+            a.style.background = "lightblue"
+            let b = document.getElementsByClassName("para")
+            b[0].style.color = "red"
+            
+        }
+        document.body.appendChild(btn)
+    </script>
+</body>
+</html> -->
+
+<!-- enevenListeners -->
+<!-- 1.click -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="head">click action HEADING</h1>
+    <script>
+        let btn = document.createElement("button")
+        btn.textContent = "addstyles"
+        btn.addEventListener("click",function(){
+            let a = document.getElementById("head")
+            a.style.color = "blue"
+            a.style.background = "lightblue"
+
+        })
+        document.body.appendChild(btn)
+    </script>
+</body>
+</html> -->
+
+<!-- 2.dbclick-->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="item1">dbclick ACTION</h1>
+    <script>
+        let btn = document.createElement("button")
+        btn.innerHTML = "click me"
+        
+        btn.addEventListener("dblclick",function(){
+            let b = document.getElementsByClassName("item1")
+            b[0].style.color = "purple"
+        })
+        document.body.appendChild(btn)
+    </script>
+</body>
+</html> -->
+
+<!-- 3.mouseover event -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="head">mouseover event</h1>
+    <script>
+        let btn  = document.createElement("button")
+        btn.textContent = "click"
+        document.body.appendChild(btn)
+        let h1 = document.getElementById("head")
+        h1.addEventListener("mouseover",function(){
+           h1.style.color = "green"
+           h1.style.background = "yellow"
+
+        })
+    </script>
+</body>
+</html> -->
+
+<!-- 4.keydown Event -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="box" placeholder="type anything">
+    <script>
+        let box = document.getElementById("box")
+        box.addEventListener("keydown",function(){
+            console.log("key pressed")
+        })
+    </script>
+</body>
+</html> -->
+
+
+<!-- change event -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="city">
+    <option>Hyderabad</option>
+    <option>Chennai</option>
+</select>
+
+<script>
+document.getElementById("city").addEventListener("change", function() {
+    alert("You selected: " + this.value);
+});
+</script>
+
+</body>
+</html>
+
+
+ -->
+
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: lightgray;
+            border: 2px solid black;
+            margin-bottom: 10px;
+        }
+        #colorText{
+            font-size: 20px;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+ </head>
+ <body>
+    <center>
+    <div id="box"></div>
+    <p id="colorText">Current color: lightgrey</p></center>
+    <script>
+        let box = document.getElementById("box")
+        let text = document.getElementById("colorText")
+        function updateColor(color){
+            text.textContent = "Current color" + color;
+        }
+
+        box.addEventListener("click",function(){
+            box.style.background = "red";
+            updateColor("red")
+        })
+
+
+        box.addEventListener("dblclick",function(){
+            box.style.background = "blue";
+            updateColor("blue")
+        })
+
+        box.addEventListener("mouseover",function(){
+            box.style.background = "green"
+            updateColor("green")
+        })
+
+        box.addEventListener("mouseout",function(){
+            box.style.background = "lightgray";
+            updateColor("lightgray")
+
+        })
+
+
+        document.addEventListener("keypress",function(){
+            let randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+            box.style.background = randomColor;
+            updateColor(randomColor);
+        });
+    </script>
+ </body>
+ </html>
