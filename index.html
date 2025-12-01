@@ -3,14 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Daily Habit Tracker</title>
+    <link rel="stylesheet" href="sty.css">
 </head>
 <body>
-    <h1>Helo</h1>
-    <h2>world</h2>
-    <!--anchor tag-->
-    <a href="https://en.wikipedia.org/wiki/Nature_photography">click</a>
+
+    <!-- Top Bar -->
+    <header class="topbar">
+        <div class="logo">Habit Tracker</div>
+        <div class="top-actions">
+            <button id="themeToggle" class="icon-btn" title="Toggle theme">🌙</button>
+            <button class="text-btn" onclick="showProfilePage()">Profile</button>
+        </div>
+    </header>
+
+    <!-- LOGIN PAGE -->
+   
+
+    <section id="loginPage" class="page active">
+    <div class="center-wrapper">
+        <div class="card login-card">
+
+            <h2>Welcome 👋</h2>
+            <p class="subtitle" id="loginSubtitle"></p>
+
+            <!-- Username -->
+            <input type="text" id="loginUsername" placeholder="Username">
+
+            <!-- Password -->
+            <input type="password" id="loginPassword" placeholder="Password">
+
+            <!-- Confirm Password (only visible during signup) -->
+            <input type="password" id="confirmPassword" placeholder="Confirm Password">
+
+            <button class="primary-btn" onclick="loginOrCreate()">Continue</button>
+
+            <p class="error-text" id="loginError"></p>
+
+            <!-- Forgot Password Link -->
+            <p class="forgot-link" onclick="goToForgotPassword()">Forgot Password?</p>
+
+        </div>
+    </div>
+</section>
+
+
+<section id="forgotPage" class="page">
+    <div class="center-wrapper">
+        <div class="card login-card">
+            <h2>Reset Password 🔐</h2>
+            <p class="subtitle">Enter username and your new password.</p>
+
+            <input type="text" id="resetUser" placeholder="Username">
+            <input type="password" id="newPass" placeholder="New Password">
+
+            <button class="primary-btn" onclick="resetPassword()">Reset Password</button>
+            <button class="secondary-btn" onclick="backToLogin()">Back to Login</button>
+
+            <p id="resetError" class="error-text"></p>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- HABIT PAGE -->
+    <section id="habitPage" class="page">
+        <div class="layout">
+            <div class="card">
+                <h2>Hi, <span id="user"></span> 👋</h2>
+                <p class="subtitle">Create habits and mark them every day.</p>
+
+                <div class="add-box">
+                    <input type="text" id="habitInput" placeholder="Enter new habit (e.g. Drink water)">
+                    <button class="primary-btn" onclick="addHabit()">Add</button>
+                </div>
+
+                <div class="tab-bar">
+                    <button id="tabHabits" class="tab-btn active" onclick="showHabitsTab()">Habits</button>
+                    <button id="tabWeekly" class="tab-btn" onclick="showWeeklyTab()">Weekly View</button>
+                    <button class="tab-btn" onclick="showChartPage()">Chart</button>
+                </div>
+
+                <!-- Habits Tab -->
+                <div id="habitsTab" class="tab-content active">
+                    <ul id="habitList" class="habit-list"></ul>
+                </div>
+
+                <!-- Weekly Calendar Tab -->
+                <div id="weeklyTab" class="tab-content">
+                    <h3>This Week</h3>
+                    <p class="subtitle small">
+                        See which days you completed each habit in the last 7 days.
+                    </p>
+                    <div id="weeklyGrid"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHART PAGE -->
+    <section id="chartPage" class="page">
+        <div class="layout">
+            <div class="card">
+                <div class="card-header-row">
+                    <div>
+                        <h2>Progress Chart 📊</h2>
+                        <p class="subtitle">User: <span id="chartUser"></span></p>
+                    </div>
+                    <button class="text-btn" onclick="showHabitPage()">Back to Habits</button>
+                </div>
+
+                <div id="chartArea"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROFILE PAGE -->
+    <section id="profilePage" class="page">
+        <div class="layout">
+            <div class="card">
+                <div class="card-header-row">
+                    <h2>Profile 👤</h2>
+                    <button class="text-btn" onclick="showHabitPage()">Back</button>
+                </div>
+
+                <div class="profile-info">
+                    <p><strong>Username:</strong> <span id="profileName"></span></p>
+                    <p><strong>Total Habits:</strong> <span id="profileHabits"></span></p>
+                    <p><strong>Total Completions:</strong> <span id="profileCompletions"></span></p>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="secondary-btn" onclick="clearAllData()">Reset All Data</button>
+                    <button class="danger-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
-
-

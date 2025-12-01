@@ -1,0 +1,490 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+:root{
+    --bg: #f1f4f8;
+    --card-bg: #ffffff;
+    --text-main: #1f2933;
+    --text-muted: #6b7280;
+    --primary: #2563eb;
+    --primary-soft: #dbeafe;
+    --border: #e5e7eb;
+    --danger: #ef4444;
+}
+
+body{
+    background: var(--bg);
+    color: var(--text-main);
+    min-height: 100vh;
+}
+
+/* Dark mode */
+body.dark{
+    --bg: #020617;
+    --card-bg: #0b1220;
+    --text-main: #e5e7eb;
+    --text-muted: #9ca3af;
+    --primary: #3b82f6;
+    --primary-soft: #1d283a;
+    --border: #1f2937;
+    --danger: #f97373;
+}
+
+/* Top bar */
+.topbar{
+    width: 100%;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+body.dark .topbar{
+    background: rgba(15,23,42,0.9);
+}
+
+.logo{
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary);
+}
+
+.top-actions{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon-btn{
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.text-btn{
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--text-main);
+}
+
+/* Pages */
+.page{
+    display: none;
+    padding: 24px 16px 32px;
+}
+
+.page.active{
+    display: block;
+}
+
+.center-wrapper{
+    min-height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Layout & cards */
+.layout{
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.card{
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: 0 18px 45px rgba(15,23,42,0.12);
+    padding: 20px 18px;
+    border: 1px solid var(--border);
+}
+
+.login-card{
+    max-width: 380px;
+    width: 100%;
+}
+
+.card-header-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Typography */
+h2{
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+}
+
+h3{
+    font-size: 1.05rem;
+    margin: 12px 0 6px;
+}
+
+.subtitle{
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+}
+
+.subtitle.small{
+    font-size: 0.8rem;
+}
+
+/* Form */
+.form-group{
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+label{
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    color: var(--text-muted);
+}
+
+/* input{
+    width: 100%;
+    padding: 9px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    outline: none;
+    font-size: 0.9rem;
+    background: transparent;
+    color: var(--text-main);
+} */
+
+/* Space between input fields */
+.login-card input{
+    margin-bottom: 15px;
+}
+
+/* Forgot password link */
+.forgot-link{
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: #2563eb;
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: center;
+}
+.forgot-link:hover{
+    color: #1e40af;
+}
+
+/* Center button on forgot page */
+.secondary-btn{
+    margin-top: 10px;
+}
+
+
+
+input{
+    width: 100%;
+    padding: 9px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    outline: none;
+    font-size: 0.9rem;
+
+    background: var(--card-bg);   /* 👈 FIXED — text visible now */
+    color: var(--text-main);      /* 👈 visible text */
+}
+
+
+input:focus{
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary-soft);
+}
+
+/* Buttons */
+.primary-btn{
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+    margin-top: 4px;
+}
+
+.primary-btn:hover{
+    opacity: 0.95;
+}
+
+.secondary-btn, .danger-btn{
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    margin-top: 8px;
+    font-size: 0.9rem;
+}
+
+.secondary-btn{
+    color: var(--text-main);
+}
+
+.danger-btn{
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+/* Error */
+.error-text{
+    color: #ef4444;
+    font-size: 0.85rem;
+    margin-top: 8px;
+}
+
+/* Add habit box */
+.add-box{
+    display: flex;
+    gap: 8px;
+    margin: 12px 0 16px;
+}
+
+.add-box input{
+    flex: 1 !important;
+    min-width: 200px !important;
+    padding: 12px 18px;
+    font-size: 1rem;
+    background: #ffffff;
+    color: #1f2933;
+    border-radius: 999px;
+}
+
+
+
+/* Tabs */
+.tab-bar{
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.tab-btn{
+    flex: 1;
+    min-width: 80px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.tab-btn.active{
+    background: var(--primary-soft);
+    color: var(--primary);
+    border-color: var(--primary-soft);
+}
+
+.tab-content{
+    display: none;
+}
+
+.tab-content.active{
+    display: block;
+}
+
+/* Habit list */
+.habit-list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.habit-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    border-radius: 12px;
+    background: linear-gradient(to right, rgba(37,99,235,0.04), rgba(37,99,235,0.02));
+    border: 1px solid var(--border);
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.habit-main{
+    flex: 1;
+    min-width: 160px;
+}
+
+.habit-name{
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.habit-meta{
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.habit-actions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: flex-end;
+}
+
+.habit-actions button{
+    padding: 5px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+.done-today{
+    background: #22c55e1a;
+    border-color: #22c55e60;
+}
+
+/* Chart */
+.chart-row{
+    margin: 14px 0;
+}
+
+.bar-box{
+    width: 100%;
+    height: 16px;
+    background: #e5e7eb40;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 4px 0;
+}
+
+.bar-fill{
+    height: 100%;
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+    border-radius: 999px;
+    width: 0;
+    transition: width 0.6s ease;
+}
+
+.streak-text{
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Weekly grid */
+#weeklyGrid{
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.week-row{
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(15,23,42,0.015);
+}
+
+.week-row-title{
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.week-days{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.day-cell{
+    font-size: 0.7rem;
+    text-align: center;
+    padding: 4px 0;
+    border-radius: 8px;
+    border: 1px solid transparent;
+}
+
+.day-label{
+    color: var(--text-muted);
+    font-size: 0.65rem;
+}
+
+.day-cell.done{
+    background: var(--primary-soft);
+    border-color: var(--primary-soft);
+}
+
+/* Profile */
+.profile-info p{
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+.profile-actions{
+    margin-top: 18px;
+}
+
+/* Responsive */
+@media (max-width: 768px){
+    .card{
+        padding: 18px 14px;
+    }
+
+    .topbar{
+        padding: 8px 12px;
+    }
+
+    .logo{
+        font-size: 1rem;
+    }
+
+    .habit-item{
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px){
+    .topbar{
+        flex-direction: row;
+    }
+
+    .tab-bar{
+        flex-direction: row;
+    }
+
+    .card-header-row{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .top-actions{
+        gap: 4px;
+    }
+}
