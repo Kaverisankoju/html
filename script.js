@@ -1,504 +1,634 @@
-// ---------- UTILITIES ----------
+const VALID_HABITS = [
+    // Health & Fitness
+    "drink water", "hydration", "drinking water",
+    "exercise", "workout", "gym", "fitness",
+    "walking", "walk", "morning walk", "evening walk",
+    "running", "jogging", "cycling",
+    "yoga", "meditation", "breathing exercise", "stretching",
+    "pushups", "situps", "plank", "skipping",
+    "eat healthy", "healthy eating", "diet",
+    "sleep early", "wake up early", "sleep on time",
+    "no junk food", "take vitamins", "take medicine",
+    "sunlight exposure", "10k steps", "steps walking",
+
+    // Study & Career
+    "study", "reading", "read", "read book", "study python",
+    "coding", "learn coding", "practice coding",
+    "practice java", "practice sql", "web development",
+    "learn new skill", "watch tutorials",
+    "revision", "write notes", "solve mcqs",
+    "learn english", "vocabulary practice",
+
+    // Productivity
+    "planning", "journal", "journaling", "write journal",
+    "organize room", "cleaning", "declutter",
+    "make bed", "todo list", "check email",
+    "time management", "goal setting",
+    "budgeting", "track expenses",
+
+    // Mind & Personal Development
+    "gratitude", "affirmations", "visualization",
+    "stay positive", "deep breathing",
+    "no social media", "limit screen time",
+    "digital detox", "focus session",
+    "learn something new",
+
+    // Hobbies
+    "playing", "play games", "sports",
+    "painting", "drawing", "sketching",
+    "music practice", "play guitar",
+    "practice singing", "dance practice",
+    "gardening", "photography",
+
+    // Cleaning & Home
+    "dishwashing", "laundry", "clean desk",
+    "clean room", "clean kitchen",
+    "cooking", "cook food", "meal prep",
+    "water plants",
+
+    // Self-Care
+    "skincare", "haircare", "self care",
+    "take bath", "brush teeth",
+    "evening skincare", "morning skincare",
+    "relaxation", "me time",
+
+    // Work / Office
+    "check tasks", "complete tasks",
+    "project work", "office work",
+    "team meeting", "reply to emails",
+    "update project",
+
+    // Spiritual
+    "prayer", "devotion", "read bible", "read bhagavad gita",
+    "chanting", "meditation", "gratitude prayer",
+
+    // Finance
+    "save money", "track expenses", "budget planning",
+    "no unnecessary spending",
+
+    // Personal Growth
+    "learn habit", "practice discipline",
+    "no procrastination", "learn communication",
+    "practice speaking", "practice writing",
+    "improve vocabulary", "read article",
+
+    // Food / Nutrition
+    "eat fruits", "eat vegetables",
+    "no sugar", "no caffeine",
+    "drink milk", "eat breakfast",
+
+    // Wellness
+    "take break", "rest", "relax",
+    "mindfulness", "hydrate",
+    "posture correction",
+    
+    // Social / Family
+    "talk to parents", "call family",
+    "quality time", "help parents",
+    "meet friends",
+
+    // Other Useful Habits
+    "no smoking", "no alcohol",
+    "pet care", "feed pets",
+    "practice driving", "learn driving",
+
+    // Learning & Creative
+    "learn maths", "learn physics",
+    "practice problems",
+    "creative writing", "content writing",
+    "blog writing", "read news",
+
+    // Technology / Developer Habits
+    "practice github", "push code",
+    "learn dsa", "practice dsa",
+    "learn frontend", "learn backend",
+    "practice mysql", "build projects"
+];
+
+
+
+
+
+
+/*******************************
+      PAGE SWITCHER
+*******************************/
 function showPage(id) {
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
     document.getElementById(id).classList.add("active");
 }
+/******** SHOW WEEKLY TAB ********/
+function showWeeklyTab() {
+    document.getElementById("tabHabits").classList.remove("active");
+    document.getElementById("tabWeekly").classList.add("active");
 
-function setTab(activeId) {
-    document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
-    document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
+    document.getElementById("habitsTab").classList.remove("active");
+    document.getElementById("weeklyTab").classList.add("active");
 
-    if(activeId === "habits"){
-        document.getElementById("tabHabits").classList.add("active");
-        document.getElementById("habitsTab").classList.add("active");
-    }else if(activeId === "weekly"){
-        document.getElementById("tabWeekly").classList.add("active");
-        document.getElementById("weeklyTab").classList.add("active");
+    renderWeekly();
+}
+
+/******** SHOW HABITS TAB ********/
+function showHabitsTab() {
+    document.getElementById("tabWeekly").classList.remove("active");
+    document.getElementById("tabHabits").classList.add("active");
+
+    document.getElementById("weeklyTab").classList.remove("active");
+    document.getElementById("habitsTab").classList.add("active");
+}
+
+
+/*******************************
+      USER SYSTEM
+*******************************/
+function loadUsers() {
+    return JSON.parse(localStorage.getItem("users") || "[]");
+}
+
+function saveUsers(users) {
+    localStorage.setItem("users", JSON.stringify(users));
+}
+
+/******** REGISTER ********/
+function registerUser() {
+    let user = document.getElementById("regUser").value.trim();
+    let pass = document.getElementById("regPass").value.trim();
+    let confirm = document.getElementById("regConfirm").value.trim();
+    let error = document.getElementById("regError");
+
+    error.textContent = "";
+
+    if (!user || !pass || !confirm) {
+        error.textContent = "All fields required.";
+        return;
     }
-}
 
-function todayKey(){
-    const d = new Date();
-    return d.toISOString().split("T")[0]; // yyyy-mm-dd
-}
-
-function getLast7Days(){
-    const days = [];
-    const names = ["S","M","T","W","T","F","S"];
-    const today = new Date();
-    for(let i=6;i>=0;i--){
-        const d = new Date();
-        d.setDate(today.getDate() - i);
-        days.push({
-            key: d.toISOString().split("T")[0],
-            label: names[d.getDay()]
-        });
+    if (pass !== confirm) {
+        error.textContent = "Passwords do not match.";
+        return;
     }
-    return days;
-}
 
-// ---------- STATE ----------
-let habits = JSON.parse(localStorage.getItem("habits") || "[]");
+    let users = loadUsers();
+    let exists = users.find(u => u.username === user);
 
-// ensure dates field exists
-habits.forEach(h => {
-    if(!Array.isArray(h.dates)) h.dates = [];
-});
-
-// ---------- THEME ----------
-const body = document.body;
-const themeToggle = document.getElementById("themeToggle");
-
-function applyTheme(){
-    const theme = localStorage.getItem("theme") || "light";
-    if(theme === "dark"){
-        body.classList.add("dark");
-        if(themeToggle) themeToggle.textContent = "☀️";
-    }else{
-        body.classList.remove("dark");
-        if(themeToggle) themeToggle.textContent = "🌙";
+    if (exists) {
+        alert("User already exists. Please login.");
+        showPage("loginPage");
+        return;
     }
-}
 
-if(themeToggle){
-    themeToggle.addEventListener("click", () => {
-        const current = localStorage.getItem("theme") || "light";
-        const next = current === "light" ? "dark" : "light";
-        localStorage.setItem("theme", next);
-        applyTheme();
+    users.push({
+        username: user,
+        password: pass,
+        habits: []
     });
+
+    saveUsers(users);
+
+    alert("Registration successful!");
+    showPage("loginPage");
 }
 
-applyTheme();
+// GUEST LOGIN
 
-// ---------- LOGIN ----------
-// ---------- LOGIN (Create + Login + Forgot Password) ----------
+function guestLogin() {
+    // Create guest user if not exists
+    let users = loadUsers();
+    let guest = users.find(u => u.username === "Guest");
 
-function loginOrCreate() {
-    let storedUser = localStorage.getItem("habitUser");
-    let storedPass = localStorage.getItem("habitPassword");
+    if (!guest) {
+        users.push({
+            username: "Guest",
+            password: "",
+            habits: []
+        });
+        saveUsers(users);
+    }
 
-    let username = document.getElementById("loginUsername").value.trim();
-    let password = document.getElementById("loginPassword").value.trim();
-    let confirmPass = document.getElementById("confirmPassword").value.trim();
+    // Set Guest as current user
+    localStorage.setItem("currentUser", "Guest");
+
+    // Go to Habit Page
+    showHabitPage();
+}
+
+
+/******** LOGIN ********/
+function loginUser() {
+    let username = document.getElementById("loginUser").value.trim();
+    let password = document.getElementById("loginPass").value.trim();
     let error = document.getElementById("loginError");
 
     error.textContent = "";
 
-    // No user exists → first time setup
-    if (!storedUser || !storedPass) {
+    let users = loadUsers();
+    let user = users.find(u => u.username === username);
 
-        if (username === "" || password === "" || confirmPass === "") {
-            error.textContent = "All fields are required to create account.";
-            return;
-        }
-
-        if (password !== confirmPass) {
-            error.textContent = "Passwords do not match.";
-            return;
-        }
-
-        localStorage.setItem("habitUser", username);
-        localStorage.setItem("habitPassword", password);
-
-        document.getElementById("confirmPassword").style.display = "none";
-
-        showHabitPage();
+    if (!user) {
+        alert("User not found. Please register.");
+        showPage("registerPage");
         return;
     }
 
-    // Existing user → login
-    if (username !== storedUser) {
-        error.textContent = "Username is incorrect.";
-        return;
-    }
-
-    if (password !== storedPass) {
+    if (user.password !== password) {
         error.textContent = "Wrong password.";
         return;
     }
 
-    showHabitPage();
+    localStorage.setItem("currentUser", username);
+
+    showHabitPage(); // 👈 IMPORTANT
 }
 
-// Forgot Password Actions
-// ---------- FORGOT PASSWORD PAGE ----------
-
-function goToForgotPassword(){
-    document.getElementById("resetUser").value = "";
-    document.getElementById("newPass").value = "";
-    document.getElementById("resetError").textContent = "";
-    showPage("forgotPage");
-}
-
-function backToLogin(){
-    document.getElementById("loginError").textContent = "";
-    showPage("loginPage");
-}
-
-// ---------- FORGOT PASSWORD (RESET) ----------
+/******** FORGOT PASSWORD ********/
 function resetPassword() {
-    const resetUser = document.getElementById("resetUser").value.trim();
-    const newPass   = document.getElementById("newPass").value.trim();
-    const error     = document.getElementById("resetError");
+    let username = document.getElementById("forgotUser").value.trim();
+    let newPass = document.getElementById("forgotNewPass").value.trim();
+    let error = document.getElementById("forgotError");
 
-    // default error style
-    error.style.color = "#ef4444";
     error.textContent = "";
 
-    if (resetUser === "" || newPass === "") {
-        error.textContent = "Both fields are required.";
+    let users = loadUsers();
+    let user = users.find(u => u.username === username);
+
+    if (!user) {
+        error.textContent = "User not found.";
         return;
     }
 
-    // ✅ Overwrite stored username + password with new values
-    localStorage.setItem("habitUser", resetUser);
-    localStorage.setItem("habitPassword", newPass);
+    user.password = newPass;
+    saveUsers(users);
 
-    // success message in green
     error.style.color = "green";
-    error.textContent = "Password changed successfully! Redirecting to login...";
+    error.textContent = "Password changed successfully!";
 
-    // go back to login after a short delay
     setTimeout(() => {
-        document.getElementById("loginUsername").value = resetUser;
-        document.getElementById("loginPassword").value = "";
         showPage("loginPage");
-    }, 1500);
+        document.getElementById("loginUser").value = username;
+    }, 1400);
 }
 
+function goToLogin() { showPage("loginPage"); }
+function goToRegister() { showPage("registerPage"); }
+function goToForgot() { showPage("forgotPage"); }
 
-
-function logout() {
-    if (!confirm("Logout?")) return;
-
-    // Clear habit data but not user login credentials
-    habits = [];
-    saveHabits();
-
-    showPage("loginPage");
+/*******************************
+        HABIT SYSTEM
+*******************************/
+function getCurrentUserObj() {
+    let user = localStorage.getItem("currentUser");
+    let users = loadUsers();
+    return users.find(u => u.username === user);
 }
 
-
-if (!storedPass) {
-    // First-time user → show Create Account
-} else {
-    // Existing user → show Login only
+function saveCurrentUser(obj) {
+    let users = loadUsers();
+    let index = users.findIndex(u => u.username === obj.username);
+    users[index] = obj;
+    saveUsers(users);
 }
 
+/******** SHOW HABIT PAGE ********/
+function showHabitPage() {
+    let username = localStorage.getItem("currentUser");
 
-// ---------- HABIT PAGE ----------
-function saveHabits(){
-    localStorage.setItem("habits", JSON.stringify(habits));
-}
+    if (!username) {
+        showPage("loginPage");
+        return;
+    }
 
-function showHabitPage(){
-    document.getElementById("user").textContent = localStorage.getItem("habitUser") || "";
-    showPage("habitPage");
-    setTab("habits");
+    document.getElementById("user").textContent = username;
+
+    showPage("habitPage"); // 👈 Fixes buttons not working
     renderHabits();
+    renderWeekly();
 }
 
-function addHabit(){
-    const input = document.getElementById("habitInput");
-    const name = input.value.trim();
-    if(name === "") return;
 
-    habits.push({
-        name,
+function isValidHabit(name, existingHabits) {
+    name = name.trim().toLowerCase();
+
+    // 1. Basic checks
+    if (name.length < 3) return "Habit name too short.";
+    if (/[^a-zA-Z ]/.test(name)) return "Habit must contain only letters.";
+    if (existingHabits.some(h => h.name.toLowerCase() === name))
+        return "Habit already exists.";
+
+    // 2. Check dictionary of real habits
+    if (!VALID_HABITS.includes(name)) {
+        return "This is not a valid habit. Please enter a real habit.";
+    }
+
+    return "";
+}
+
+
+/******** ADD HABIT ********/
+function addHabit() {
+    let input = document.getElementById("habitInput");
+    let name = input.value.trim();
+    let user = getCurrentUserObj();
+
+    let validation = isValidHabit(name, user.habits);
+    if (validation !== "") {
+        alert(validation);
+        return;
+    }
+
+    user.habits.push({
+        name: name,
         streak: 0,
         lastDone: "",
         dates: []
     });
 
-    saveHabits();
+    saveCurrentUser(user);
+
     renderHabits();
     renderWeekly();
     input.value = "";
 }
 
-function markDone(index){
-    const today = todayKey();
-    const habit = habits[index];
+/******** MARK DONE TODAY ********/
+function markDone(index) {
+    let user = getCurrentUserObj();
+    let habit = user.habits[index];
 
-    if(!habit.dates) habit.dates = [];
+    let today = new Date().toISOString().split("T")[0];
 
-    if(!habit.dates.includes(today)){
+    if (!habit.dates.includes(today)) {
         habit.dates.push(today);
     }
 
-    // calculate streak: consecutive days ending today
+    // Calculate streak
     let streak = 0;
-    const datesSet = new Set(habit.dates);
     let d = new Date(today);
-    while(true){
-        const key = d.toISOString().split("T")[0];
-        if(datesSet.has(key)){
-            streak++;
-            d.setDate(d.getDate() - 1);
-        }else{
-            break;
-        }
+
+    while (habit.dates.includes(d.toISOString().split("T")[0])) {
+        streak++;
+        d.setDate(d.getDate() - 1);
     }
+
     habit.streak = streak;
     habit.lastDone = today;
 
-    saveHabits();
+    saveCurrentUser(user);
+
     renderHabits();
     renderWeekly();
     renderChart();
 }
 
-function editHabit(index){
-    const newName = prompt("Edit habit name:", habits[index].name);
-    if(newName !== null){
-        const trimmed = newName.trim();
-        if(trimmed !== ""){
-            habits[index].name = trimmed;
-            saveHabits();
-            renderHabits();
-            renderWeekly();
-            renderChart();
-        }
+/******** EDIT HABIT ********/
+function editHabit(index) {
+    let user = getCurrentUserObj();
+    let newName = prompt("Enter new name:", user.habits[index].name);
+
+    if (newName && newName.trim() !== "") {
+        user.habits[index].name = newName.trim();
+        saveCurrentUser(user);
+        renderHabits();
+        renderWeekly();
+        renderChart();
     }
 }
 
-function resetHabit(index){
-    if(!confirm("Reset streak and history for this habit?")) return;
-    habits[index].streak = 0;
-    habits[index].lastDone = "";
-    habits[index].dates = [];
-    saveHabits();
+/******** RESET HABIT ********/
+function resetHabit(index) {
+    if (!confirm("Reset this habit?")) return;
+
+    let user = getCurrentUserObj();
+    user.habits[index].streak = 0;
+    user.habits[index].lastDone = "";
+    user.habits[index].dates = [];
+
+    saveCurrentUser(user);
     renderHabits();
     renderWeekly();
     renderChart();
 }
 
-function deleteHabit(index){
-    if(!confirm("Delete this habit?")) return;
-    habits.splice(index, 1);
-    saveHabits();
+/******** DELETE HABIT ********/
+function deleteHabit(index) {
+    if (!confirm("Delete this habit?")) return;
+
+    let user = getCurrentUserObj();
+    user.habits.splice(index, 1);
+
+    saveCurrentUser(user);
     renderHabits();
     renderWeekly();
     renderChart();
 }
 
-function renderHabits(){
-    const list = document.getElementById("habitList");
+// Toggle Theme
+document.getElementById("themeToggle").onclick = function() {
+    document.body.classList.toggle("dark");
+
+    // Save theme
+    if (document.body.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+        this.textContent = "☀️";
+    } else {
+        localStorage.setItem("theme", "light");
+        this.textContent = "🌙";
+    }
+};
+
+// Load theme on startup
+window.addEventListener("load", () => {
+    let saved = localStorage.getItem("theme");
+    if (saved === "dark") {
+        document.body.classList.add("dark");
+        document.getElementById("themeToggle").textContent = "☀️";
+    }
+});
+
+function getStreakClass(streak) {
+    if (streak >= 6) return "streak-high";
+    if (streak >= 3) return "streak-mid";
+    return "streak-low";
+}
+
+
+
+
+function renderHabits() {
+    let user = getCurrentUserObj();
+
+    // Ensure values exist
+    user.habits = user.habits.map(h => ({
+        name: h.name,
+        streak: h.streak ?? 0,
+        lastDone: h.lastDone ?? "",
+        dates: h.dates ?? []
+    }));
+    saveCurrentUser(user);
+
+    let list = document.getElementById("habitList");
     list.innerHTML = "";
 
-    habits.forEach((habit, index) => {
-        const li = document.createElement("li");
+    let today = new Date().toISOString().split("T")[0];
+
+    user.habits.forEach((h, index) => {
+        let isDoneToday = h.dates.includes(today);
+        let streakClass = getStreakClass(h.streak);
+
+        let li = document.createElement("li");
         li.className = "habit-item";
 
-        const main = document.createElement("div");
-        main.className = "habit-main";
+        li.innerHTML = `
+            <div class="habit-main">
+                <div class="habit-name">${h.name}</div>
+                <div class="habit-meta ${streakClass}">
+                    Streak: ${h.streak} • Last: ${h.lastDone || "None"}
+                </div>
+            </div>
 
-        const name = document.createElement("div");
-        name.className = "habit-name";
-        name.textContent = habit.name;
+            <div class="habit-actions">
+                <button class="${isDoneToday ? "done-today-btn" : ""}" onclick="markDone(${index})">
+                    ${isDoneToday ? "✔ Done" : "Done Today"}
+                </button>
+                <button onclick="editHabit(${index})">Edit</button>
+                <button onclick="resetHabit(${index})">Reset</button>
+                <button onclick="deleteHabit(${index})">Delete</button>
+            </div>
+        `;
 
-        const meta = document.createElement("div");
-        meta.className = "habit-meta";
-
-        const last = habit.lastDone ? `Last done: ${habit.lastDone}` : "Not done yet";
-        meta.textContent = `Streak: ${habit.streak} days • ${last}`;
-
-        main.appendChild(name);
-        main.appendChild(meta);
-
-        const actions = document.createElement("div");
-        actions.className = "habit-actions";
-
-        const doneBtn = document.createElement("button");
-        doneBtn.textContent = "Done Today";
-        doneBtn.onclick = () => markDone(index);
-
-        const editBtn = document.createElement("button");
-        editBtn.textContent = "Edit";
-        editBtn.onclick = () => editHabit(index);
-
-        const resetBtn = document.createElement("button");
-        resetBtn.textContent = "Reset";
-        resetBtn.onclick = () => resetHabit(index);
-
-        const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "Delete";
-        deleteBtn.onclick = () => deleteHabit(index);
-
-        actions.appendChild(doneBtn);
-        actions.appendChild(editBtn);
-        actions.appendChild(resetBtn);
-        actions.appendChild(deleteBtn);
-
-        // highlight if done today
-        if(habit.lastDone === todayKey()){
-            li.classList.add("done-today");
-        }
-
-        li.appendChild(main);
-        li.appendChild(actions);
         list.appendChild(li);
     });
-
-    renderWeekly();
 }
 
-// ---------- WEEKLY VIEW ----------
-function renderWeekly(){
-    const container = document.getElementById("weeklyGrid");
-    if(!container) return;
-    container.innerHTML = "";
 
-    const days = getLast7Days();
 
-    habits.forEach(habit => {
-        const row = document.createElement("div");
+/******** WEEKLY VIEW ********/
+function renderWeekly() {
+    let user = getCurrentUserObj();
+    let grid = document.getElementById("weeklyGrid");
+    grid.innerHTML = "";
+
+    function last7() {
+        let arr = [];
+        let names = ["S","M","T","W","T","F","S"];
+        let now = new Date();
+
+        for (let i = 6; i >= 0; i--) {
+            let d = new Date();
+            d.setDate(now.getDate() - i);
+            arr.push({
+                key: d.toISOString().split("T")[0],
+                label: names[d.getDay()]
+            });
+        }
+        return arr;
+    }
+
+    let days = last7();
+
+    user.habits.forEach(h => {
+        let row = document.createElement("div");
         row.className = "week-row";
 
-        const title = document.createElement("div");
+        let title = document.createElement("div");
         title.className = "week-row-title";
-        title.textContent = habit.name;
+        title.textContent = h.name;
 
-        const week = document.createElement("div");
-        week.className = "week-days";
-
-        const datesSet = new Set(habit.dates || []);
+        let box = document.createElement("div");
+        box.className = "week-days";
 
         days.forEach(d => {
-            const cell = document.createElement("div");
+            let cell = document.createElement("div");
             cell.className = "day-cell";
-            if(datesSet.has(d.key)){
-                cell.classList.add("done");
-            }
-
-            cell.innerHTML = `
-                <div class="day-label">${d.label}</div>
-            `;
-            week.appendChild(cell);
+            cell.innerHTML = `<div class="day-label">${d.label}</div>`;
+            if (h.dates.includes(d.key)) cell.classList.add("done");
+            box.appendChild(cell);
         });
 
         row.appendChild(title);
-        row.appendChild(week);
-        container.appendChild(row);
+        row.appendChild(box);
+        grid.appendChild(row);
     });
 }
 
-// ---------- CHART PAGE ----------
-function showChartPage(){
-    document.getElementById("chartUser").textContent = localStorage.getItem("habitUser") || "";
+/******** CHART PAGE ********/
+function showChartPage() {
     showPage("chartPage");
+    document.getElementById("chartUser").textContent =
+        localStorage.getItem("currentUser");
     renderChart();
 }
 
-function renderChart(){
-    const chartArea = document.getElementById("chartArea");
-    if(!chartArea) return;
+function renderChart() {
+    let user = getCurrentUserObj();
+    let area = document.getElementById("chartArea");
 
-    chartArea.innerHTML = "";
-    if(habits.length === 0){
-        chartArea.innerHTML = "<p class='subtitle'>No habits yet. Add some to see the chart.</p>";
+    area.innerHTML = "";
+
+    if (user.habits.length === 0) {
+        area.innerHTML = "<p>No habits yet</p>";
         return;
     }
 
-    const maxStreak = Math.max(...habits.map(h => h.streak), 1);
+    let max = Math.max(...user.habits.map(h => h.streak));
 
-    habits.forEach(habit => {
-        const row = document.createElement("div");
+    user.habits.forEach(h => {
+        let row = document.createElement("div");
         row.className = "chart-row";
 
-        const name = document.createElement("div");
-        name.className = "habit-name";
-        name.textContent = habit.name;
+        let percent = (h.streak / max) * 100;
 
-        const barBox = document.createElement("div");
-        barBox.className = "bar-box";
-
-        const barFill = document.createElement("div");
-        barFill.className = "bar-fill";
-
-        const percent = (habit.streak / maxStreak) * 100;
-        setTimeout(() => {
-            barFill.style.width = percent + "%";
-        }, 50);
-
-        barBox.appendChild(barFill);
-
-        const info = document.createElement("div");
-        info.className = "streak-text";
-        info.innerHTML = `Streak: <b>${habit.streak}</b> day(s)`;
-
-        row.appendChild(name);
-        row.appendChild(barBox);
-        row.appendChild(info);
-
-        chartArea.appendChild(row);
+        row.innerHTML = `
+            <div class="habit-name">${h.name}</div>
+            <div class="bar-box">
+                <div class="bar-fill" style="width:${percent}%"></div>
+            </div>
+            <div class="streak-text">Streak: ${h.streak}</div>
+        `;
+        area.appendChild(row);
     });
 }
 
-// ---------- WEEKLY TAB SWITCH ----------
-function showHabitsTab(){
-    setTab("habits");
-    renderHabits();
-}
 
-function showWeeklyTab(){
-    setTab("weekly");
-    renderWeekly();
-}
 
-// ---------- PROFILE ----------
-function showProfilePage(){
-    const user = localStorage.getItem("habitUser") || "Guest";
-    const profileName = document.getElementById("profileName");
-    const profileHabits = document.getElementById("profileHabits");
-    const profileCompletions = document.getElementById("profileCompletions");
-
-    if(profileName) profileName.textContent = user;
-    if(profileHabits) profileHabits.textContent = habits.length;
+/******** PROFILE ********/
+function showProfilePage() {
+    let u = getCurrentUserObj();
+    document.getElementById("profileName").textContent = u.username;
+    document.getElementById("profileHabits").textContent = u.habits.length;
 
     let total = 0;
-    habits.forEach(h => total += h.dates ? h.dates.length : 0);
-    if(profileCompletions) profileCompletions.textContent = total;
+    u.habits.forEach(h => total += h.dates.length);
+    document.getElementById("profileCompletions").textContent = total;
 
     showPage("profilePage");
 }
 
-function clearAllData(){
-    if(!confirm("This will clear all habits and history. Continue?")) return;
-    habits = [];
-    saveHabits();
+/******** CLEAR ALL DATA ********/
+function clearAllData() {
+    if (!confirm("Delete ALL habits?")) return;
+
+    let u = getCurrentUserObj();
+    u.habits = [];
+    saveCurrentUser(u);
+
     renderHabits();
     renderWeekly();
     renderChart();
-    alert("All data cleared.");
 }
 
-function logout(){
-    if(!confirm("Logout and clear current session?")) return;
-    localStorage.removeItem("habitUser");
+/******** LOGOUT ********/
+function logout() {
+    localStorage.removeItem("currentUser");
     showPage("loginPage");
 }
 
+/******** INITIAL LOAD ********/
+window.onload = () => {
+    let users = loadUsers();
 
-// ---------- INITIAL LOAD ----------
-window.addEventListener("load", () => {
-
-    const storedPass = localStorage.getItem("habitPassword");
-
-    if (!storedPass) {
-        // First-time user
-        document.getElementById("loginSubtitle").textContent =
-            "Create your account to start tracking habits.";
-        document.getElementById("confirmPassword").style.display = "block";
-
+    if (users.length === 0) {
+        showPage("registerPage");
     } else {
-        // Returning user
-        document.getElementById("loginSubtitle").textContent =
-            "Login to continue.";
-        document.getElementById("confirmPassword").style.display = "none";
+        showPage("loginPage");
     }
-
-    showPage("loginPage");
-});
-
+};

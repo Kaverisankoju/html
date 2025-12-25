@@ -195,6 +195,31 @@ label{
     margin-top: 10px;
 }
 
+#habitPage.active {
+    display: block;
+}
+
+/* Done Today button highlight */
+.done-today-btn {
+    background: #22c55e1a !important;
+    border-color: #22c55e60 !important;
+    color: #16a34a !important;
+    font-weight: 600;
+}
+
+/* Streak color levels */
+.streak-low {
+    color: #6b7280; /* gray */
+}
+
+.streak-mid {
+    color: #2563eb; /* blue */
+}
+
+.streak-high {
+    color: #16a34a; /* green */
+    font-weight: 600;
+}
 
 
 input{

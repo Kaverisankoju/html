@@ -17,53 +17,66 @@
         </div>
     </header>
 
-    <!-- LOGIN PAGE -->
-   
+    <section id="registerPage" class="page">
 
-    <section id="loginPage" class="page active">
     <div class="center-wrapper">
         <div class="card login-card">
+            <h2>Register 👋</h2>
+            <p class="subtitle">Create your account</p>
 
-            <h2>Welcome 👋</h2>
-            <p class="subtitle" id="loginSubtitle"></p>
+            <input type="text" id="regUser" placeholder="Username">
+            <input type="password" id="regPass" placeholder="Password">
+            <input type="password" id="regConfirm" placeholder="Confirm Password">
 
-            <!-- Username -->
-            <input type="text" id="loginUsername" placeholder="Username">
+            <button class="primary-btn" onclick="registerUser()">Register</button>
+            <p id="regError" class="error-text"></p>
 
-            <!-- Password -->
-            <input type="password" id="loginPassword" placeholder="Password">
-
-            <!-- Confirm Password (only visible during signup) -->
-            <input type="password" id="confirmPassword" placeholder="Confirm Password">
-
-            <button class="primary-btn" onclick="loginOrCreate()">Continue</button>
-
-            <p class="error-text" id="loginError"></p>
-
-            <!-- Forgot Password Link -->
-            <p class="forgot-link" onclick="goToForgotPassword()">Forgot Password?</p>
-
+            <p class="forgot-link" onclick="goToLogin()">Already have an account? Login</p>
         </div>
     </div>
 </section>
 
+
+    <!-- LOGIN PAGE -->
+   
+
+   <section id="loginPage" class="page">
+    <div class="center-wrapper">
+        <div class="card login-card">
+            <h2>Welcome 👋</h2>
+            <p class="subtitle">Login to continue</p>
+
+            <input type="text" id="loginUser" placeholder="Username">
+            <input type="password" id="loginPass" placeholder="Password">
+
+            <button class="primary-btn" onclick="loginUser()">Continue</button>
+            <p id="loginError" class="error-text"></p>
+
+            <p class="forgot-link" onclick="goToForgot()">Forgot Password?</p>
+            <p class="forgot-link" onclick="goToRegister()">New user? Register</p>
+        </div>
+    </div>
+</section>
+
+
+<button class="secondary-btn" onclick="guestLogin()">Continue as Guest</button>
 
 <section id="forgotPage" class="page">
     <div class="center-wrapper">
         <div class="card login-card">
             <h2>Reset Password 🔐</h2>
-            <p class="subtitle">Enter username and your new password.</p>
 
-            <input type="text" id="resetUser" placeholder="Username">
-            <input type="password" id="newPass" placeholder="New Password">
+            <input type="text" id="forgotUser" placeholder="Enter username">
+            <input type="password" id="forgotNewPass" placeholder="Enter new password">
 
             <button class="primary-btn" onclick="resetPassword()">Reset Password</button>
-            <button class="secondary-btn" onclick="backToLogin()">Back to Login</button>
+            <button class="secondary-btn" onclick="goToLogin()">Back to Login</button>
 
-            <p id="resetError" class="error-text"></p>
+            <p id="forgotError" class="error-text"></p>
         </div>
     </div>
 </section>
+
 
 
 
