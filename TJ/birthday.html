@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Tom ❤️</title>
+
+<!-- <link rel="stylesheet" href="style.css"> -->
+ <style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+}
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:
+    radial-gradient(white 1px,transparent 1px);
+
+    background-size:40px 40px;
+
+    opacity:.3;
+
+    z-index:-1;
+
+    pointer-events:none;
+}
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+/* .card{
+    width:700px;
+    background:white;
+    padding:40px;
+    text-align:center;
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(0,0,0,0.2);
+} */
+
+.card{
+
+    position:relative;
+
+    z-index:10;
+
+    width:700px;
+    background:white;
+    padding:40px;
+    text-align:center;
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(0,0,0,0.2);
+}
+
+h1{
+    color:#ff4d6d;
+}
+
+h2{
+    color:#6a0572;
+    margin:15px 0;
+}
+
+.message{
+    margin-top:15px;
+    line-height:1.8;
+}
+
+button{
+    margin:10px;
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:#ff4d6d;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+#surprise{
+    margin-top:20px;
+    font-size:20px;
+    color:#6a0572;
+    font-weight:bold;
+}
+
+/* HEARTS */
+
+.heart{
+    position:absolute;
+    font-size:25px;
+    animation:fly 5s linear;
+}
+
+@keyframes fly{
+
+    from{
+        transform:translateY(100vh);
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-100px);
+        opacity:0;
+    }
+}
+
+
+/* POPUP */
+
+.modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.8);
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.modal-content{
+    background:white;
+    width:90%;
+    max-width:900px;
+    padding:20px;
+    border-radius:20px;
+    text-align:center;
+}
+
+.modal-content img{
+    max-width:100%;
+    max-height:70vh;
+    object-fit:contain;
+    border-radius:15px;
+}
+
+.gallery-buttons{
+    margin-top:15px;
+}
+
+.close{
+    float:right;
+    font-size:35px;
+    cursor:pointer;
+    color:red;
+}
+
+
+/* LETTER */
+
+.letter-box{
+
+    background:white;
+
+    width:90%;
+    max-width:700px;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    line-height:2;
+
+    animation:openLetter 1s ease;
+}
+
+@keyframes openLetter{
+
+    from{
+        transform:scale(0);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+/* .confetti{
+
+    position:fixed;
+
+    width:12px;
+    height:12px;
+
+    top:-20px;
+
+    border-radius:3px;
+
+    animation:confettiFall 5s linear forwards;
+}
+
+@keyframes confettiFall{
+
+    0%{
+        transform:
+        translateY(0)
+        rotate(0deg);
+    }
+
+    100%{
+
+        transform:
+        translateY(120vh)
+        rotate(720deg);
+
+    }
+} */
+
+.shake{
+
+    animation:shake .5s;
+}
+
+@keyframes shake{
+
+    0%{transform:translateX(0);}
+    25%{transform:translateX(-5px);}
+    50%{transform:translateX(5px);}
+    75%{transform:translateX(-5px);}
+    100%{transform:translateX(0);}
+}
+ 
+.balloon{
+
+    position:fixed;
+
+    bottom:-100px;
+
+    font-size:50px;
+
+    animation:flyUp linear infinite;
+
+    z-index:1;
+}
+
+@keyframes flyUp{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(-120vh);
+    }
+}
+
+.cute-row{
+
+    margin-top:20px;
+
+    font-size:35px;
+
+    text-align:center;
+
+    animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+#funnyQuote{
+
+    margin-top:30px;
+
+    background:#fff0f5;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    width:80%;
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+    font-size:18px;
+
+    color:#444;
+
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.cartoon{
+
+    position:fixed;
+
+    font-size:55px;
+
+    z-index:2;
+
+    animation:floatCartoon 4s ease-in-out infinite;
+
+    filter:drop-shadow(0 0 10px rgba(255,255,255,0.8));
+}
+
+@keyframes floatCartoon{
+
+    0%{
+        transform:translateY(0px) rotate(0deg);
+    }
+
+    50%{
+        transform:translateY(-20px) rotate(8deg);
+    }
+
+    100%{
+        transform:translateY(0px) rotate(0deg);
+    }
+}
+
+.cat{
+    top:18%;
+    left:5%;
+}
+
+.pig{
+    top:25%;
+    right:5%;
+}
+
+.monkey{
+    bottom:18%;
+    left:6%;
+}
+
+.buffalo{
+    bottom:18%;
+    right:6%;
+}
+
+.paw{
+    top:50%;
+    left:2%;
+}
+
+@keyframes floatCartoon{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-20px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+@media screen and (max-width:768px){
+
+    .cartoon{
+
+        font-size:35px;
+    }
+
+    .cat{
+        left:2%;
+    }
+
+    .pig{
+        right:2%;
+    }
+
+    .monkey{
+        left:2%;
+    }
+
+    .buffalo{
+        right:2%;
+    }
+}
+
+@media(max-width:768px){
+
+    .cartoon{
+        font-size:30px;
+    }
+}
+
+.rainbow{
+
+    text-align:center;
+
+    font-size:70px;
+
+    animation:rainbowMove 3s infinite alternate;
+}
+
+@keyframes rainbowMove{
+
+    from{
+        transform:translateX(-20px);
+    }
+
+    to{
+        transform:translateX(20px);
+    }
+}
+@media(max-width:768px){
+
+    .rainbow{
+        font-size:40px;
+    }
+}
+
+#walkingCat{
+
+    position:fixed;
+
+    bottom:10px;
+
+    left:-100px;
+
+    font-size:60px;
+
+    animation:walkCat 20s linear infinite;
+}
+
+@keyframes walkCat{
+
+    from{
+        left:-100px;
+    }
+
+    to{
+        left:110%;
+    }
+}
+
+@media(max-width:768px){
+
+    #walkingCat{
+        font-size:40px;
+    }
+}
+
+.star{
+
+    position:fixed;
+
+    top:10%;
+
+    left:10%;
+
+    font-size:25px;
+
+    animation:twinkle 1s infinite alternate;
+}
+
+.star2{
+    top:20%;
+    left:80%;
+}
+
+.star3{
+    top:80%;
+    left:20%;
+}
+
+@keyframes twinkle{
+
+    from{
+        opacity:.3;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+.cake-box{
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    width:90%;
+
+    max-width:600px;
+}
+
+.cake-design{
+
+    font-size:120px;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.cake-design:hover{
+
+    transform:scale(1.1);
+}
+
+#cakePieces{
+
+    margin-top:20px;
+
+    font-size:40px;
+}
+
+#cakeStatus{
+
+    margin-top:20px;
+
+    color:#ff4d6d;
+}
+
+#cakeImage{
+
+    width:280px;
+
+    max-width:90%;
+
+    cursor:pointer;
+
+    border-radius:20px;
+
+    transition:.3s;
+
+    margin-top:20px;
+}
+
+.candles{
+
+    font-size:45px;
+
+    margin-bottom:15px;
+
+    animation:flicker 1s infinite alternate;
+}
+
+@keyframes flicker{
+
+    from{
+        opacity:1;
+    }
+
+    to{
+        opacity:0.7;
+    }
+}
+
+#cakeImage:hover{
+
+    transform:scale(1.05);
+}
+#cakeImage:hover{
+
+    transform:scale(1.05);
+}
+
+/* #giftBox{
+
+    font-size:80px;
+
+    cursor:pointer;
+
+    animation:giftShake 1s infinite;
+
+    margin-bottom:20px;
+}
+
+#giftBox p{
+
+    font-size:18px;
+
+    color:#ff4d6d;
+} */
+
+.letter-box{
+
+    animation:slideLetter 1s ease;
+}
+
+@keyframes slideLetter{
+
+    from{
+
+        transform:translateY(-100px);
+
+        opacity:0;
+    }
+
+    to{
+
+        transform:translateY(0);
+
+        opacity:1;
+    }
+}
+
+@keyframes giftShake{
+
+    0%{transform:rotate(0deg);}
+    25%{transform:rotate(-5deg);}
+    50%{transform:rotate(5deg);}
+    75%{transform:rotate(-5deg);}
+    100%{transform:rotate(0deg);}
+}
+@media(max-width:768px){
+
+    .card{
+
+        width:95%;
+
+        padding:25px;
+    }
+
+    h1{
+
+        font-size:35px;
+    }
+
+    h2{
+
+        font-size:28px;
+    }
+
+    button{
+
+        width:100%;
+
+        margin-top:10px;
+    }
+
+    .modal-content{
+
+        width:95%;
+    }
+
+    .letter-box{
+
+        width:95%;
+
+        padding:20px;
+    }
+
+    .cake-design{
+
+        font-size:80px;
+    }
+
+    .cute-row{
+
+        font-size:25px;
+    }
+}
+@media screen and (max-width:768px){
+
+    .card{
+
+        width:95%;
+
+        padding:20px;
+    }
+
+    h1{
+
+        font-size:32px;
+    }
+
+    h2{
+
+        font-size:24px;
+    }
+
+    button{
+
+        width:100%;
+
+        margin:8px 0;
+    }
+
+    #cakeImage{
+
+        width:220px;
+    }
+
+    .candles{
+
+        font-size:35px;
+    }
+
+    .letter-box,
+    .cake-box,
+    .modal-content{
+
+        width:95%;
+
+        padding:20px;
+    }
+
+    .cute-row{
+
+        font-size:25px;
+    }
+
+    #funnyQuote{
+
+        width:95%;
+
+        font-size:16px;
+    }
+
+    .balloon{
+
+        font-size:30px;
+    }
+}
+@media screen and (max-width:480px){
+
+    h1{
+
+        font-size:26px;
+    }
+
+    h2{
+
+        font-size:20px;
+    }
+
+    p{
+
+        font-size:14px;
+    }
+
+    #cakeImage{
+
+        width:180px;
+    }
+
+    .candles{
+
+        font-size:28px;
+    }
+
+    .cute-row{
+
+        font-size:20px;
+    }
+
+    button{
+
+        font-size:14px;
+
+        padding:10px;
+    }
+
+}
+@media screen and (min-width:769px) and (max-width:1024px){
+
+    .card{
+
+        width:85%;
+    }
+
+    #cakeImage{
+
+        width:250px;
+    }
+}
+ </style>
+</head>
+<body>
+
+
+
+<!-- <div class="rainbow">
+🌈
+</div> -->
+
+<div class="balloon" style="left:5%;animation-duration:8s;">🎈</div>
+
+<div class="balloon" style="left:15%;animation-duration:10s;">🎈</div>
+
+<div class="balloon" style="left:25%;animation-duration:7s;">🎈</div>
+
+<div class="balloon" style="left:40%;animation-duration:12s;">🎈</div>
+
+<div class="balloon" style="left:55%;animation-duration:9s;">🎈</div>
+
+<div class="balloon" style="left:70%;animation-duration:11s;">🎈</div>
+
+<div class="balloon" style="left:85%;animation-duration:8s;">🎈</div>
+<div class="cartoon cat">🐱</div>
+<div class="cartoon pig">🐷</div>
+<div class="cartoon monkey">🐒</div>
+<div class="cartoon buffalo">🦬</div>
+<div class="cartoon paw">🐾</div>
+
+
+<div class="card">
+    <div class="rainbow">
+🌈
+</div>
+
+    <h1>🎂 Happy Birthday 🎂</h1>
+
+
+    <h2>My Dear Tom ❤️</h2>
+
+    
+
+    <p>
+        To my favorite Idiot 😜 <br>
+        My cute Pilli 🐱 <br>
+        My Hero 🦸 <br>
+        And My Special One 💖
+    </p>
+
+    <p class="message">
+        May your life be filled with happiness,
+        success, laughter, adventures and lots of love.
+        Thank you for being the most amazing friend.
+        No matter how much I tease you,
+        you'll always be my favorite person.
+    </p>
+
+    <button onclick="showWish()">
+        🎁 Surprise
+    </button>
+
+    <button onclick="showMemories()">
+        📸 Our Memories
+    </button>
+
+    <button onclick="showLetter()">
+        💌 Open My Letter
+    </button>
+
+    <button onclick="showAwards()">
+    🏆 Bestie Awards
+</button>
+
+<button onclick="showCake()">
+    🎂 Cut The Cake
+</button>
+
+
+
+<div id="funnyQuote">
+
+😜 Warning:
+This Hero sometimes acts like an Idiot!
+
+</div>
+
+<div class="cute-row">
+
+ 😎💖🐱💕😙🐷❣️🧔‍♂️
+
+</div>
+
+
+
+
+
+    <div id="surprise"></div>
+
+</div>
+
+
+<!-- MEMORY POPUP -->
+
+<div id="memoryModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeMemories()">
+            &times;
+        </span>
+
+        <h2>❤️ Our Beautiful Memories ❤️</h2>
+
+        <img
+        id="memoryImage"
+        src="images/Img-1.jpg"
+        alt="memory">
+
+        <div class="gallery-buttons">
+
+            <button onclick="prevPhoto()">
+                ⬅ Previous
+            </button>
+
+            <button onclick="nextPhoto()">
+                Next ➡
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- LETTER POPUP -->
+
+<div id="letterModal" class="modal">
+
+    <div class="letter-box">
+
+        <span class="close" onclick="closeLetter()">
+            &times;
+        </span>
+
+        <h2>💌 To My Tom 💌</h2>
+
+        <p>
+
+            My favorite Idiot 😜,<br><br>
+
+            Thank you for all the laughter,
+            all the memories,
+            all the support,
+            and all the crazy moments we've shared.
+
+            <br><br>
+
+            You are not just my best friend,
+            you are my comfort person,
+            my Hero 🦸,
+            my cute Pilli 🐱,
+            and my Special One ❤️.
+
+            <br><br>
+
+            No matter where life takes us,
+            our friendship will always remain special.
+
+            <br><br>
+
+            Happy Birthday Tom 🎂🎉❤️
+
+        </p>
+
+    </div>
+
+</div>
+<div id="awardsModal" class="modal">
+
+    <div class="letter-box">
+
+        <span class="close"
+        onclick="closeAwards()">
+        &times;
+        </span>
+
+        <h2>🏆 Bestie Awards 🏆</h2>
+
+        <h3>🏆 Best Drama King Award</h3>
+
+        <h3>🐱 Cutest Pilli Award</h3>
+
+        <h3>🦸 Hero Of The Year Award</h3>
+
+        <h3>😜 Certified Idiot Award</h3>
+
+        <h3>❤️ Most Special Person Award</h3>
+
+    </div>
+
+</div>
+
+<div id="cakeModal" class="modal">
+
+    <div class="cake-box">
+
+        <span class="close"
+        onclick="closeCake()">
+        &times;
+        </span>
+
+        <h2>🎂 Birthday Cake 🎂</h2>
+
+        <!-- <div id="cake" onclick="cutCake()">
+
+            🕯️🕯️🕯️
+
+            </div> -->
+
+            <div class="candles">
+    🕯️ 🕯️ 🕯️
+</div>
+
+
+    <img
+    id="cakeImage"
+    src="images/Cake-1.jpg"
+    onclick="cutCake()"
+    alt="Birthday Cake">
+
+<h3 id="cakeStatus">
+Click the cake to cut it 🍰
+</h3>
+
+</div>
+
+
+        <!-- </div>
+
+        <h3 id="cakeStatus">
+
+            Click the cake to cut it 🍰
+
+        </h3>
+
+        <div id="cakePieces"></div>
+
+    </div> -->
+
+</div>
+
+
+<!-- <div class="balloons">
+    <div>🎈</div>
+    <div>🎈</div>
+    <div>🎈</div>
+    <div>🎈</div>
+    <div>🎈</div>
+    <div>🎈</div>
+    <div>🎈</div>
+    <div>🎈</div>
+    <div>🎈</div>
+</div> -->
+<div id="walkingCat">
+🐱
+</div>
+
+<div class="star">⭐</div>
+<div class="star star2">✨</div>
+<div class="star star3">⭐</div>
+
+<!-- <script src="script.js"></script> -->
+ <script>
+    function showWish(){
+
+    let surprise = document.getElementById("surprise");
+
+    surprise.innerHTML = "";
+
+    let text =
+    "🎉 Happy Birthday Tom! 🎂❤️ My Hero, My Pilli, My Favorite Idiot Forever ❤️";
+
+    let i = 0;
+
+    let typing = setInterval(()=>{
+
+        if(i < text.length){
+
+            surprise.innerHTML += text.charAt(i);
+
+            i++;
+
+        }
+        else{
+            clearInterval(typing);
+        }
+
+    },50);
+
+
+    // HEARTS
+
+    for(let i=0;i<30;i++){
+
+        let heart = document.createElement("div");
+
+        heart.innerHTML = "❤️";
+
+        heart.classList.add("heart");
+
+        heart.style.left = Math.random()*100 + "vw";
+
+        heart.style.animationDuration =
+        (Math.random()*3+2)+"s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.remove();
+        },5000);
+    }
+
+
+    // CONFETTI
+// CELEBRATION EMOJIS
+
+let emojis = [
+"🎉",
+"🎊",
+"🎂",
+"🎈",
+"💖",
+"✨",
+"🥳"
+];
+
+for(let i=0;i<40;i++){
+
+    let e = document.createElement("div");
+
+    e.innerHTML =
+    emojis[Math.floor(Math.random()*emojis.length)];
+
+    e.classList.add("heart");
+
+    e.style.left =
+    Math.random()*100 + "vw";
+
+    e.style.fontSize =
+    (Math.random()*20+25)+"px";
+
+    document.body.appendChild(e);
+
+    setTimeout(()=>{
+        e.remove();
+    },5000);
+}
+
+    let card = document.querySelector(".card");
+
+card.classList.add("shake");
+
+setTimeout(()=>{
+
+    card.classList.remove("shake");
+
+},500);
+
+}
+
+
+let cakes = [
+
+"images/Cake-1.jpg",
+"images/Cake-2.jpg",
+"images/Cake-3.jpg",
+"images/Cake-4.jpg",
+"images/Cake-5.jpg",
+"images/Cake-6.jpg"
+
+];
+
+let cakeIndex = 0;
+
+function cutCake(){
+
+    cakeIndex++;
+
+    if(cakeIndex < cakes.length){
+
+        document
+        .getElementById("cakeImage")
+        .src = cakes[cakeIndex];
+
+        document
+        .getElementById("cakeStatus")
+        .innerHTML =
+        `Cake Slice ${cakeIndex} Served 🍰`;
+
+    }
+
+    else{
+
+        document
+        .getElementById("cakeStatus")
+        .innerHTML =
+        "🎉 Cake Finished! Happy Birthday Tom ❤️";
+
+    }
+
+}
+
+
+/* PHOTOS */
+
+let photos = [
+
+"images/Img-1.jpg",
+"images/Img-2.jpg",
+"images/Img-3.jpg",
+"images/Img-4.jpg",
+"images/Img-5.jpg"
+
+];
+
+let current = 0;
+
+
+/* MEMORY POPUP */
+
+function showMemories(){
+
+    document.getElementById("memoryModal")
+    .style.display = "flex";
+}
+
+function closeMemories(){
+
+    document.getElementById("memoryModal")
+    .style.display = "none";
+}
+
+function nextPhoto(){
+
+    current++;
+
+    if(current >= photos.length){
+        current = 0;
+    }
+
+    document.getElementById("memoryImage").src =
+    photos[current];
+}
+
+function prevPhoto(){
+
+    current--;
+
+    if(current < 0){
+        current = photos.length - 1;
+    }
+
+    document.getElementById("memoryImage").src =
+    photos[current];
+}
+
+
+/* LETTER POPUP */
+
+function showLetter(){
+
+    document.getElementById("letterModal")
+    .style.display = "flex";
+}
+
+function closeLetter(){
+
+    document.getElementById("letterModal")
+    .style.display = "none";
+}
+function showAwards(){
+
+    document
+    .getElementById("awardsModal")
+    .style.display="flex";
+
+}
+
+function closeAwards(){
+
+    document
+    .getElementById("awardsModal")
+    .style.display="none";
+
+}
+function showCake(){
+
+    document
+    .getElementById("cakeModal")
+    .style.display="flex";
+
+}
+
+function closeCake(){
+
+    document
+    .getElementById("cakeModal")
+    .style.display="none";
+
+}
+
+document.addEventListener("mousemove",(e)=>{
+
+    let heart=document.createElement("div");
+
+    heart.innerHTML="💖";
+
+    heart.style.position="fixed";
+
+    heart.style.left=e.clientX+"px";
+
+    heart.style.top=e.clientY+"px";
+
+    heart.style.fontSize="20px";
+
+    heart.style.pointerEvents="none";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },1000);
+
+});
+ </script>
+
+</body>
+</html>
